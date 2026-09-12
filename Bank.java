@@ -34,8 +34,16 @@ public class Bank {
                 + " was successful. New balance: " + account.getBalance());
     }
 
-    public void withdraw(BankAccount account, double amount, Integer enteredPin) {
-        if (!account.withdraw(amount, enteredPin)) return;
+    /**
+     * Section 3 (LSP): the parameter type is the intersection "a BankAccount
+     * that is also Withdrawable". Bank needs the account half for saving and
+     * notifying, and the Withdrawable half for the operation itself.
+     *
+     * Passing a FixedDepositAccount here is a compile error, not a run-time
+     * exception — the design makes the bad call unsayable.
+     */
+    public <T extends BankAccount & Withdrawable> void withdraw(T account, double amount) {
+        if (!account.withdraw(amount)) return;
         accountRepository.save(account);
         notificationService.send("To: " + account.getName()
                 + " | Your withdrawal of Rs. " + amount

@@ -73,7 +73,19 @@ public class BankAccount {
         return true;
     }
 
-    public boolean withdraw(double amount, Integer enteredPin) {
+    /**
+     * Section 3 (LSP): this used to be `public boolean withdraw(...)`, which
+     * meant every subclass of BankAccount inherited the promise that money can
+     * be taken out of it. FixedDepositAccount cannot keep that promise, and
+     * the usual escape — override it and throw UnsupportedOperationException —
+     * is precisely the LSP violation.
+     *
+     * So the mechanics stay here (one copy, no duplication) but they are
+     * `protected`: only a subclass that genuinely CAN withdraw exposes them,
+     * by implementing Withdrawable. FixedDepositAccount inherits this and
+     * simply never opens it up, so no caller can reach it.
+     */
+    protected boolean performWithdrawal(double amount, Integer enteredPin) {
 
         if (!status.equals("Active")) {
             System.out.println("Account is not active");
