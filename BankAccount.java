@@ -128,6 +128,16 @@ public class BankAccount {
         return pin != null && pin.equals(enteredPin);
     }
 
+    /**
+     * Section 2 (OCP): superseded by InterestPolicy. Left here only to show
+     * the failure mode — this chain was written before Salary accounts
+     * existed, so a SalaryAccount falls through to the `else` and silently
+     * earns 0.0. Interest is now calculated by passing an InterestPolicy to
+     * Bank.creditInterest(), which never needs to know the account type.
+     *
+     * @deprecated use {@link InterestPolicy#calculate(double)} instead.
+     */
+    @Deprecated
     public double calculateInterest() {
         if (accountType.equals("Savings")) {
             return balance * 0.04;
