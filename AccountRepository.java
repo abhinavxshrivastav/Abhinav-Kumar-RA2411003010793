@@ -1,12 +1,18 @@
-/**
- * Owns exactly one reason to change: how an account gets persisted.
- * Swap this for a real JDBC/JPA implementation later and nothing
- * else in the codebase needs to know.
- */
-public class AccountRepository {
+import java.util.List;
 
-    public void save(BankAccount account) {
-        // Pretend this talks to MySQL. In reality just prints.
-        System.out.println("[DB] Saving account " + account.getAccountNumber() + " to MySQL...");
-    }
+/**
+ * GreenLeaf Bank — Section 4, Tasks 3 and 4: the persistence abstraction.
+ *
+ * In Lab 1 this was a concrete class that printed "[DB] Saving...". It is now
+ * the interface Bank depends on, so the storage decision — in memory today, a
+ * text file this sprint, MySQL or Mongo later — never reaches Bank at all.
+ *
+ * Owns exactly one reason to change: what the bank needs to ask of storage.
+ * NOT how any particular store answers.
+ */
+public interface AccountRepository {
+
+    void save(BankAccount account);
+
+    List<AccountRecord> findAll();
 }

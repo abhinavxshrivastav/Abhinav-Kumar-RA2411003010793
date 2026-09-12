@@ -1,7 +1,13 @@
 /**
- * GreenLeaf Bank — Section 3. Savings: withdrawable, 4% interest.
+ * GreenLeaf Bank — Savings: 4% interest.
+ *
+ * Section 4 (ISP): the capability list is the class's honest job description.
+ * Depositable and StatementProvider are satisfied by methods inherited from
+ * BankAccount; Withdrawable is implemented below; Transferable supplies its
+ * own default. Nothing here is a stub.
  */
-public class SavingsAccount extends BankAccount implements Withdrawable {
+public class SavingsAccount extends BankAccount
+        implements Depositable, Withdrawable, Transferable, StatementProvider {
 
     public SavingsAccount(int accountNumber, String name, int age, double balance) {
         super(accountNumber, name, age, balance, "Savings");

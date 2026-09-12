@@ -22,3 +22,6 @@ build/
 # OS / OneDrive
 Thumbs.db
 desktop.ini
+
+# Generated at run time by FileAccountRepository
+accounts.txt
