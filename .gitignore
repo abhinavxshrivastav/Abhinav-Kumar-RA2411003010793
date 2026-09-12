@@ -1,0 +1,24 @@
+# Compiled class files
+*.class
+.dist/
+
+# Build output
+bin/
+out/
+target/
+build/
+
+# Logs
+*.log
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# OS / OneDrive
+Thumbs.db
+desktop.ini
